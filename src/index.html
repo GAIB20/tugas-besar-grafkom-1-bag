@@ -1,0 +1,73 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tubes 1 Grafkom</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="canvas-board">
+        <canvas id="canvas" width="800" height="400"></canvas>
+      </div>
+      <div class="tools-board">
+        <div class="options">
+          <label class="create">Create Shapes</label>
+          <div class="create-button">
+            <button class="button-3" onclick="initializeLineDrawingMode()">Line</button>
+            <button class="button-3" onclick="">Square</button>
+            <button class="button-3" onclick="">Rectangle</button>
+            <button class="button-3" onclick="">Polygon</button>
+          </div>
+          <div class="Color-Picker">
+            <label for="color-picker">Select a color:</label><br/>
+            <input type="color" id="color-picker" name="color-picker" value="#ff0000">
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+
+  <script id="vertexShader" type="notjs">
+    attribute vec4 a_position;
+    attribute vec4 a_color;
+    varying vec4 v_color;
+
+    uniform vec2 u_resolution;
+
+
+    void main() {
+      gl_PointSize = 10.0;
+
+       // convert the position from pixels to 0.0 to 1.0
+       vec2 zeroToOne = a_position.xy / u_resolution;
+
+       // convert from 0->1 to 0->2
+       vec2 zeroToTwo = zeroToOne * 2.0;
+
+       // convert from 0->2 to -1->+1 (clipspace)
+       vec2 clipSpace = zeroToTwo - 1.0;
+
+       gl_Position = vec4(clipSpace * vec2(1, -1), 0, 1);
+      v_color = a_color;
+      }
+  </script>
+
+  <script id="fragmentShader" type="notjs">
+    precision mediump float;
+
+    // Getting color input
+    varying vec4 v_color;
+
+    void main() {
+      gl_FragColor = v_color;
+    }
+  </script>
+
+  <script src="utility.js"></script>
+  <script src="app.js"></script>
+  <script src="shapes/shape.js"></script>
+  <script src="shapes/line.js"></script>
+  <script src="tools/draw.js"></script>
+
+</html>
