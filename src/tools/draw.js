@@ -1,4 +1,5 @@
 var tempLine = null;
+var tempRectangle = null;
 var tempSquare = null;
 
 /**
