@@ -11,18 +11,16 @@ function handleSelectClick(event) {
         selectStatus = s.isInside(coordinate);
         if (selectStatus) {
             clickedModes.select = true;
-            console.log("shape " + i + ": " + s.constructor.name + " selected");
+            console.log(s);
 
             shapes.splice(i, 1);
             shapes.push(s);
+            selectedIndex = shapes.length - 1;
             
             break;
         }
     }
     resetSelectedPoints();
-    // if (selectStatus) {
-        
-    // }
 }
 
 function resetSelectedPoints() {
@@ -39,4 +37,31 @@ function clearSelectedPoints() {
     clickedModes.select = false;
     selectStatus = false;
     resetSelectedPoints();
+}
+
+function sendBackward() {
+    if (selectStatus && selectedIndex > 0 && selectedIndex < shapes.length) {
+        [shapes[selectedIndex], shapes[selectedIndex - 1]] = 
+            [shapes[selectedIndex - 1], shapes[selectedIndex]];
+        
+        selectedIndex--;
+    }
+}
+
+function sendForward() {
+    if (selectStatus && selectedIndex >= 0 && selectedIndex < shapes.length - 1) {
+        [shapes[selectedIndex], shapes[selectedIndex + 1]] = 
+            [shapes[selectedIndex + 1], shapes[selectedIndex]];
+        
+        selectedIndex++;
+    }
+}
+
+function goToBack() {
+    if (selectStatus && selectedIndex > 0 && selectedIndex < shapes.length) {
+        const [selectedShape] = shapes.splice(selectedIndex, 1);
+        shapes.unshift(selectedShape);
+        
+        selectedIndex = 0;
+    }
 }

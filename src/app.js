@@ -12,6 +12,7 @@ var shapes = [];
 var points = [];
 var selectStatus = false;
 var polygonPlaceHolder = null;
+var selectedIndex = -1;
 
 var clickedModes = {
     line: { click: false, hover: false },

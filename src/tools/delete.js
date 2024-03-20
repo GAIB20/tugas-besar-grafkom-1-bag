@@ -1,6 +1,6 @@
 function deleteObject() {
     if (selectStatus) {
-        shapes.splice(shapes.length - 1, 1);
+        shapes.splice(selectedIndex, 1);
         selectStatus = false;
         clearSelectedPoints();
     }
