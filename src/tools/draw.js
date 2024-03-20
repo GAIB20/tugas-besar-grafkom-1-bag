@@ -13,28 +13,28 @@ function initializeLineDrawingMode() {
     canvas.onmousemove = handleLineDrawHover;
     canvas.onmouseleave = resetLineDrawingState;
 }
-  
+
 /**
  * Handles mouse click events on the canvas during line drawing mode.
- * 
+ *
  * @param {MouseEvent} event - The mouse event.
  */
 function handleLineDrawClick(event) {
-    const coordinates = util.getCanvasCoord(event);
-    const isFirstClick = !clickedModes.line.click;
-  
-    if (isFirstClick) {
-        var color = util.hexToRgba(document.getElementById("color-picker").value);
-        tempLine = new Line(gl, coordinates, color);
-        clickedModes.line.click = true;
-    } else {
-        resetLineDrawingState();
-    }
+  const coordinates = util.getCanvasCoord(event);
+  const isFirstClick = !clickedModes.line.click;
+
+  if (isFirstClick) {
+    var color = util.hexToRgba(document.getElementById("color-picker").value);
+    tempLine = new Line(gl, coordinates, color);
+    clickedModes.line.click = true;
+  } else {
+    resetLineDrawingState();
+  }
 }
 
 /**
  * Handles mouse move events on the canvas during line drawing mode, after a click.
- * 
+ *
  * @param {MouseEvent} event - The mouse event.
  */
 function handleLineDrawHover(event) {
@@ -56,7 +56,7 @@ function handleLineDrawHover(event) {
         }
     }
 }
-  
+
 /**
  * Resets the drawing state when the mouse leaves the canvas during line drawing.
  */
