@@ -1,19 +1,37 @@
 class Shape {
-    constructor(type, offset, shaderCount, color, coordinates) {
-        this.type = type;
-        this.offset = offset;
-        this.shaderCount = shaderCount;
-        this.vertexData = [...coordinates, ...color]; // Combine coordinates and color into a single array.
-        this.baseColor = color; // Assign the base color directly.
+    constructor(type, offset, shaderCount, color, coordinates, copy) {
+        if (arguments.length === 6) {
+            this.type = type;
+            this.offset = offset;
+            this.shaderCount = shaderCount;
+            this.vertexData = coordinates;
+            this.baseColor = color;
+        } else {
+            this.type = type;
+            this.offset = offset;
+            this.shaderCount = shaderCount;
+            this.vertexData = [...coordinates, ...color]; // Combine coordinates and color into a single array.
+            this.baseColor = color; // Assign the base color directly.
+        }
     }
   
     draw(gl) {
         gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.vertexData), gl.STATIC_DRAW);
         gl.drawArrays(this.type, this.offset, this.shaderCount);
     }
+
+    isInside(coordinate) {}
   
     getVertexData() {
         return this.vertexData;
+    }
+
+    copyVertexData() {
+        return [...this.vertexData];
+    }
+
+    getBaseColor() {
+        return this.baseColor;
     }
   
     getPointCount() {
@@ -47,6 +65,10 @@ class Shape {
     getVertexCoordinates(index) {
         const vertexStartIndex = index * 6;
         return this.vertexData.slice(vertexStartIndex, vertexStartIndex + 2);
+    }
+
+    getCoordinates() {
+        return this.vertexData.slice(0, this.getPointCount() * 2);
     }
   
     appendVertex(coord, color = this.baseColor) {

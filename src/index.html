@@ -12,17 +12,27 @@
       </div>
       <div class="tools-board">
         <div class="options">
+
           <label class="create">Create Shapes</label>
           <div class="create-button">
             <button class="button-3" onclick="initializeLineDrawingMode()">Line</button>
-            <button class="button-3" onclick="">Square</button>
-            <button class="button-3" onclick="">Rectangle</button>
-            <button class="button-3" onclick="">Polygon</button>
+            <button class="button-3" onclick="initializeSquareDrawingMode()">Square</button>
+            <button class="button-3" onclick="initializeRectangleDrawingMode()">Rectangle</button>
+            <button class="button-3" onclick="initializePolygonDrawingMode()">Polygon</button>
           </div>
-          <div class="Color-Picker">
-            <label for="color-picker">Select a color:</label><br/>
+
+          <label for="color-picker">Select a color:</label><br/>
+          <div class="color-picker">
             <input type="color" id="color-picker" name="color-picker" value="#ff0000">
           </div>
+
+          <label class="tools">Tools</label>
+          <div class="tools">
+            <button class="button-3" onclick="initializeSelectMode()">Select</button>
+            <button class="button-3" onclick="deleteObject()">Delete</button>
+            <button class="button-3" onclick="clearCanvas()">Clear</button>
+          </div>
+
         </div>
       </div>
     </div>
@@ -68,6 +78,12 @@
   <script src="app.js"></script>
   <script src="shapes/shape.js"></script>
   <script src="shapes/line.js"></script>
+  <script src="shapes/rectangle.js"></script>
+  <script src="shapes/square.js"></script>
+  <script src="shapes/point.js"></script>
+  <script src="shapes/polygon.js"></script>
   <script src="tools/draw.js"></script>
+  <script src="tools/select.js"></script>
+  <script src="tools/delete.js"></script>
 
 </html>
