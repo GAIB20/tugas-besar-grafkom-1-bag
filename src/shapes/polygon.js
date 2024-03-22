@@ -7,6 +7,34 @@ class Polygon extends Shape {
     }
   }
 
+  isInside(coordinate) {
+    const [x, y] = coordinate;
+    const verticesCount = this.getPointCount();
+    let isInside = false;
+
+    for (let i = 0; i < verticesCount; i++) {
+      // Retrieve the current and next vertex in the polygon
+      const currentX = this.vertexData[i * 6];
+      const currentY = this.vertexData[i * 6 + 1];
+      const nextIndex = (i + 1) % verticesCount;
+      const nextX = this.vertexData[nextIndex * 6];
+      const nextY = this.vertexData[nextIndex * 6 + 1];
+
+      // Check if the line from the current vertex to the next crosses the horizontal line at the test point's y-coordinate
+      const crossesHorizontalLine = currentY > y !== nextY > y;
+
+      // Calculate the x-coordinate where the edge intersects the horizontal line
+      const edgeAtPointYX =
+        ((nextX - currentX) * (y - currentY)) / (nextY - currentY) + currentX;
+
+      // If the point's x-coordinate is to the left of the intersection, toggle the inside state
+      if (crossesHorizontalLine && x < edgeAtPointYX) {
+        isInside = !isInside;
+      }
+    }
+    return isInside;
+  }
+
   /**
    * Determines the orientation of ordered triplet (p, q, r).
    * The function returns the following values:
