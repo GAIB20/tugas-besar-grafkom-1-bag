@@ -116,6 +116,13 @@ class Shape {
     return this.vertexData.slice(colorStartIndex, colorStartIndex + 4);
   }
 
+  setVertexColor(index, color) {
+    this.vertexData[index * 6 + 2] = color[0];
+    this.vertexData[index * 6 + 3] = color[1];
+    this.vertexData[index * 6 + 4] = color[2];
+    this.vertexData[index * 6 + 5] = color[3];
+  }
+
   updateGLColor(gl, colorUniformLocation) {
     gl.uniform4f(colorUniformLocation, ...this.baseColor);
   }
