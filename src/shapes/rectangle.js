@@ -102,7 +102,7 @@ class Rectangle extends Shape {
 
     // Apply the movement to the current and next vertices.
     if (
-      this.vertexData[nextIdx * 6] === this.vertexData[idx * 6] ||
+      this.vertexData[nextIdx * 6] === this.vertexData[idx * 6] &&
       this.vertexData[nextIdx * 6 + 1] === this.vertexData[idx * 6 + 1]
     ) {
       return;
