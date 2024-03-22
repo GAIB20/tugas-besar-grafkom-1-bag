@@ -90,16 +90,22 @@ class Rectangle extends Shape {
     const movementDistance = directionX * movementX + directionY * movementY;
 
     // Apply the movement to the current and next vertices.
-    if (
-      this.vertexData[nextIdx * 6] === this.vertexData[idx * 6] &&
-      this.vertexData[nextIdx * 6 + 1] === this.vertexData[idx * 6 + 1]
-    ) {
-      return;
-    }
+    // Calculate the target positions
+    const targetX = this.vertexData[idx * 6] + directionX * movementDistance;
+    const targetY =
+      this.vertexData[idx * 6 + 1] + directionY * movementDistance;
 
-    this.vertexData[idx * 6] += directionX * movementDistance;
-    this.vertexData[idx * 6 + 1] += directionY * movementDistance;
-    this.vertexData[nextIdx * 6] += directionX * movementDistance;
-    this.vertexData[nextIdx * 6 + 1] += directionY * movementDistance;
+    // Check if the target position does not match the previous vertex's position
+    if (
+      !(
+        this.vertexData[prevIdx * 6] === targetX &&
+        this.vertexData[prevIdx * 6 + 1] === targetY
+      )
+    ) {
+      this.vertexData[idx * 6] = targetX;
+      this.vertexData[idx * 6 + 1] = targetY;
+      this.vertexData[nextIdx * 6] += directionX * movementDistance;
+      this.vertexData[nextIdx * 6 + 1] += directionY * movementDistance;
+    }
   }
 }
