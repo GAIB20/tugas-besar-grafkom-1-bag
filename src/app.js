@@ -2,23 +2,21 @@ var util = new Utility();
 var canvas = document.querySelector("#canvas");
 var gl = canvas.getContext("webgl");
 
-// var shapes = {
-//     lines: [],
-//     squares: [],
-//     rectangles: [],
-//     polygons: [],
-// }
 var shapes = [];
 var points = [];
 var selectStatus = false;
 var polygonPlaceHolder = null;
+var selectedIndex = -1;
+var selectedPoint = -1;
 
 var clickedModes = {
-    line: { click: false, hover: false },
-    square: { click: false, hover: false },
-    rectangle: { click: false, hover: false },
-    polygon: { click: false, hover: false },
-    select: false,
+  line: { click: false, hover: false },
+  square: { click: false, hover: false },
+  rectangle: { click: false, hover: false },
+  polygon: { click: false, hover: false },
+  movePoint: false,
+  resize: false,
+  select: false,
 };
 
 async function main() {
@@ -76,33 +74,33 @@ async function main() {
     // Setting the resolution
     gl.uniform2f(resolutionUniformLocation, gl.canvas.width, gl.canvas.height);
 
-        try {
-            shapes.forEach((s) => {
-                s.draw(gl);
-            });
-            points.forEach((p) => {
-                p.draw(gl);
-            })
-            if (polygonPlaceHolder)  {
-                polygonPlaceHolder.draw(gl);
-            }
-            // shapes.lines.forEach((l) => {
-            //     l.draw(gl);
-            // });
-            // shapes.squares.forEach((s) => {
-            //     s.draw(gl);
-            // });
-            // shapes.rectangles.forEach((r) => {
-            //     r.draw(gl);
-            // });
-            // shapes.polygons.forEach((p) => {
-            //     p.draw(gl);
-            // });
-        } catch (e) {
-            console.log(e.message);
-        }
-        window.requestAnimationFrame(drawScene);
+    try {
+      shapes.forEach((s) => {
+        s.draw(gl);
+      });
+      points.forEach((p) => {
+        p.draw(gl);
+      });
+      if (polygonPlaceHolder) {
+        polygonPlaceHolder.draw(gl);
+      }
+      // shapes.lines.forEach((l) => {
+      //     l.draw(gl);
+      // });
+      // shapes.squares.forEach((s) => {
+      //     s.draw(gl);
+      // });
+      // shapes.rectangles.forEach((r) => {
+      //     r.draw(gl);
+      // });
+      // shapes.polygons.forEach((p) => {
+      //     p.draw(gl);
+      // });
+    } catch (e) {
+      console.log(e.message);
     }
+    window.requestAnimationFrame(drawScene);
+  }
 }
 
 main();

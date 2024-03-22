@@ -1,14 +1,14 @@
 function deleteObject() {
-    if (selectStatus) {
-        shapes.splice(shapes.length - 1, 1);
-        selectStatus = false;
-        clearSelectedPoints();
-    }
+  if (selectStatus) {
+    shapes.splice(selectedIndex, 1);
+    selectStatus = false;
+    clearSelectedPoints();
+  }
 }
 
 function clearCanvas() {
-    shapes = [];
-    
-    selectStatus = false;
-    clearSelectedPoints();
+  shapes = [];
+
+  selectStatus = false;
+  clearSelectedPoints();
 }
