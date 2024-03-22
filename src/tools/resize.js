@@ -1,4 +1,4 @@
-function initializeResizeMode() {
+function initResizeMode() {
   canvas.onmousedown = handleResizeClick;
   canvas.onmousemove = handleResizeMove;
 }

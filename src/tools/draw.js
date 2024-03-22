@@ -43,15 +43,16 @@ function handleLineDrawHover(event) {
   if (clickedModes.line.click) {
     if (clickedModes.line.hover) {
       // Update the endpoint of the last line drawn
-      // const lastLineIndex = shapes.lines.length - 1;
-      // shapes.lines[lastLineIndex].updateVertexCoordinates(coordinates, 1);
       const lastIndex = shapes.length - 1;
       shapes[lastIndex].updateVertexCoordinates(coordinates, 1);
+      resetSelectedPoints();
     } else {
       // Start a new line segment from the last clicked point
       tempLine.appendVertex(coordinates);
       shapes.push(tempLine);
-      // shapes.lines.push(tempLine);
+      selectStatus = true;
+      selectedIndex = shapes.length - 1;
+      resetSelectedPoints();
       clickedModes.line.hover = true;
     }
   }
@@ -108,15 +109,16 @@ function handleRectangleDrawHover(event) {
   if (clickedModes.rectangle.click) {
     if (clickedModes.rectangle.hover) {
       // Update the endpoint of the last rectangle drawn
-      // const lastRectangleIndex = shapes.rectangles.length - 1;
-      // shapes.rectangles[lastRectangleIndex].changeLastCoord(coordinates);
       const lastIndex = shapes.length - 1;
       shapes[lastIndex].changeLastCoord(coordinates);
+      resetSelectedPoints();
     } else {
       // Start a new rectangle segment from the last clicked point
       tempRectangle.firstHoverCoord(coordinates);
       shapes.push(tempRectangle);
-      // shapes.rectangles.push(tempRectangle);
+      selectStatus = true;
+      selectedIndex = shapes.length - 1;
+      resetSelectedPoints();
       clickedModes.rectangle.hover = true;
     }
   }
@@ -173,15 +175,16 @@ function handleSquareDrawHover(event) {
   if (clickedModes.square.click) {
     if (clickedModes.square.hover) {
       // Update the endpoint of the last rectangle drawn
-      // const lastRectangleIndex = shapes.rectangles.length - 1;
-      // shapes.rectangles[lastRectangleIndex].changeLastCoord(coordinates);
       const lastIndex = shapes.length - 1;
       shapes[lastIndex].changeLastCoord(coordinates);
+      resetSelectedPoints();
     } else {
       // Start a new rectangle segment from the last clicked point
       tempSquare.firstHoverCoord(coordinates);
       shapes.push(tempSquare);
-      // shapes.rectangles.push(tempRectangle);
+      selectStatus = true;
+      selectedIndex = shapes.length - 1;
+      resetSelectedPoints();
       clickedModes.square.hover = true;
     }
   }
@@ -261,6 +264,9 @@ function finalizePolygonDrawing() {
 
     clickedModes.polygon.click = false;
     clickedModes.polygon.hover = false;
+    selectStatus = true;
+    selectedIndex = shapes.length - 1;
+    resetSelectedPoints();
 
     console.log(shapes);
   }

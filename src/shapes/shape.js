@@ -53,6 +53,20 @@ class Shape {
 
   movePoint(index, newCoordinates) {}
 
+  translate(newCoord, baseDistance) {
+    const middle = this.getMiddle();
+    const [dx, dy] = [newCoord[0] - middle[0], newCoord[1] - middle[1]];
+    const [newDistanceX, newDistanceY] = [
+      dx - baseDistance[0],
+      dy - baseDistance[1],
+    ];
+
+    for (let i = 0; i < this.getPointCount(); i++) {
+      this.vertexData[i * 6] += newDistanceX;
+      this.vertexData[i * 6 + 1] += newDistanceY;
+    }
+  }
+
   getMiddle() {
     let totalX = 0;
     let totalY = 0;
@@ -69,41 +83,23 @@ class Shape {
     return [midX, midY];
   }
 
-  getVertexData() {
-    return this.vertexData;
-  }
-
   copyVertexData() {
     return [...this.vertexData];
+  }
+
+  getPointCount() {
+    return this.vertexData.length / 6;
   }
 
   getBaseColor() {
     return this.baseColor;
   }
 
-  getPointCount() {
-    return this.vertexData.length / 6; // Assuming 6 values per point (x, y, r, g, b, a)
-  }
-
-  setVertexData(newVertexData) {
-    this.vertexData = newVertexData;
-  }
-
-  calculateAngleBetweenPoints(coord, middlePoint) {
-    const angle = Math.atan2(
-      coord[1] - middlePoint[1],
-      coord[0] - middlePoint[0]
-    );
-    return angle;
-  }
-
-  getVertexColor(index) {
-    const colorStartIndex = index * 6 + 2;
-    return this.vertexData.slice(colorStartIndex, colorStartIndex + 4);
-  }
-
-  updateGLColor(gl, colorUniformLocation) {
-    gl.uniform4f(colorUniformLocation, ...this.baseColor);
+  setVertexColor(index, color) {
+    this.vertexData[index * 6 + 2] = color[0];
+    this.vertexData[index * 6 + 3] = color[1];
+    this.vertexData[index * 6 + 4] = color[2];
+    this.vertexData[index * 6 + 5] = color[3];
   }
 
   updateVertexCoordinates(coord, index) {
@@ -115,10 +111,6 @@ class Shape {
   getVertexCoordinates(index) {
     const vertexStartIndex = index * 6;
     return this.vertexData.slice(vertexStartIndex, vertexStartIndex + 2);
-  }
-
-  getCoordinates() {
-    return this.vertexData.slice(0, this.getPointCount() * 2);
   }
 
   appendVertex(coord, color = this.baseColor) {
@@ -144,5 +136,32 @@ class Shape {
       isEndPoint: false,
       pointIndex: -1,
     };
+  }
+
+  rotate(initialVertex, baseCoord, coord, middle) {
+    // Calculate initial and current angles
+    let initialAngle = Math.atan2(
+      baseCoord[1] - middle[1],
+      baseCoord[0] - middle[0]
+    );
+    let currentAngle = Math.atan2(coord[1] - middle[1], coord[0] - middle[0]);
+
+    // Determine the angle of rotation needed
+    let angleDifference = currentAngle - initialAngle;
+
+    let n = this.getPointCount();
+
+    for (let i = 0; i < n; i += 1) {
+      let x = initialVertex[i * 6] - middle[0];
+      let y = initialVertex[i * 6 + 1] - middle[1];
+
+      // Apply rotation based on the angle difference
+      let newX = x * Math.cos(angleDifference) - y * Math.sin(angleDifference);
+      let newY = x * Math.sin(angleDifference) + y * Math.cos(angleDifference);
+
+      // Update vertex positions
+      this.vertexData[i * 6] = newX + middle[0];
+      this.vertexData[i * 6 + 1] = newY + middle[1];
+    }
   }
 }

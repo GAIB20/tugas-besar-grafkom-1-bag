@@ -1,4 +1,4 @@
-function initializeMovePointMode() {
+function initMoveMode() {
   canvas.onmousedown = handleSelectPoint;
   canvas.onmousemove = handleMovePoint;
 }

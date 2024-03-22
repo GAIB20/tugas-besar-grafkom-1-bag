@@ -40,18 +40,12 @@
 
           <label class="tools">Tools</label>
           <div class="tools">
-            <button class="button-3" onclick="initializeSelectMode()">
-              Select
-            </button>
-            <button class="button-3" onclick="goToBack()">To Back</button>
-            <button class="button-3" onclick="sendBackward()">Backward</button>
-            <button class="button-3" onclick="sendForward()">Forward</button>
-            <button class="button-3" onclick="initializeMovePointMode()">
-              Move Point
-            </button>
-            <button class="button-3" onclick="initializeResizeMode()">
-              Resize
-            </button>
+            <button class="button-3" onclick="initSelectMode()">Select</button>
+            <button class="button-3" onclick="initMoveMode()">MovePoint</button>
+            <button class="button-3" onclick="initResizeMode()">Resize</button>
+            <button class="button-3" onclick="initTransl()">Translate</button>
+            <button class="button-3" onclick="initRecolor()">Recolor</button>
+            <button class="button-3" onclick="initRotate()">Rotate</button>
             <button class="button-3" onclick="deleteObject()">Delete</button>
             <button class="button-3" onclick="clearCanvas()">Clear</button>
             <button class="button-3" onclick="saveModel()">Save</button>
@@ -64,6 +58,13 @@
             <button class="button-3" onclick="polygonRemovePoint()">
               Remove Point
             </button>
+          </div>
+          <label class="layer-tools">Layering</label>
+          <div class="layer-tools">
+            <button class="button-3" onclick="goToBack()">To Back</button>
+            <button class="button-3" onclick="sendBackward()">Backward</button>
+            <button class="button-3" onclick="sendForward()">Forward</button>
+            <button class="button-3" onclick="goToFront()">To Front</button>
           </div>
           <label class="load">Load</label>
           <input type="file" id="load-file" title="Load Model" />
@@ -121,5 +122,8 @@
   <script src="tools/delete.js"></script>
   <script src="tools/movePoint.js"></script>
   <script src="tools/resize.js"></script>
+  <script src="tools/translate.js"></script>
+  <script src="tools/recolor.js"></script>
+  <script src="tools/rotate.js"></script>
   <script src="tools/others.js"></script>
 </html>

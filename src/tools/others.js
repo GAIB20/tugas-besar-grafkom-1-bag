@@ -207,10 +207,19 @@ function sendForward() {
 }
 
 function goToBack() {
-  if (selectStatus && selectedIndex > 0 && selectedIndex < shapes.length) {
+  if (selectStatus) {
     const [selectedShape] = shapes.splice(selectedIndex, 1);
     shapes.unshift(selectedShape);
 
     selectedIndex = 0;
+  }
+}
+
+function goToFront() {
+  if (selectStatus) {
+    const [selectedShape] = shapes.splice(selectedIndex, 1);
+    shapes.push(selectedShape);
+
+    selectedIndex = shapes.length - 1;
   }
 }

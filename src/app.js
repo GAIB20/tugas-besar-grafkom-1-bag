@@ -15,6 +15,7 @@ var clickedModes = {
   square: { click: false, hover: false },
   rectangle: { click: false, hover: false },
   polygon: { click: false, hover: false },
+  translate: false,
   movePoint: false,
   resize: false,
   select: false,

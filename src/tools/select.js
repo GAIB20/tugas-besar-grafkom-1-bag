@@ -1,4 +1,4 @@
-function initializeSelectMode() {
+function initSelectMode() {
   canvas.onmousedown = handleSelectClick;
 }
 
