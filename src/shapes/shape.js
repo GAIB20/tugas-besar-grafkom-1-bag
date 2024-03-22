@@ -1,17 +1,19 @@
 class Shape {
-  constructor(type, offset, shaderCount, color, coordinates, copy) {
-    if (arguments.length === 6) {
+  constructor(type, offset, shaderCount, color, coordinates, kind, copy) {
+    if (arguments.length === 7) {
       this.type = type;
       this.offset = offset;
       this.shaderCount = shaderCount;
       this.vertexData = coordinates;
       this.baseColor = color;
+      this.kind = kind;
     } else {
       this.type = type;
       this.offset = offset;
       this.shaderCount = shaderCount;
-      this.vertexData = [...coordinates, ...color]; // Combine coordinates and color into a single array.
-      this.baseColor = color; // Assign the base color directly.
+      this.vertexData = [...coordinates, ...color];
+      this.baseColor = color;
+      this.kind = kind;
     }
   }
 

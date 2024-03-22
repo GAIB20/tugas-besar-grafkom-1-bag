@@ -97,6 +97,93 @@ function saveModel() {
   document.body.removeChild(a);
 }
 
+function loadModelContent(content) {
+  shapes = [];
+  var tempShapes = JSON.parse(content);
+  var idx = 0;
+
+  tempShapes.forEach((s) => {
+    if (s.kind === "line") {
+      shapes.push(
+        new Line(
+          gl,
+          [s.vertexData[0], s.vertexData[1]],
+          [s.vertexData[2], s.vertexData[3], s.vertexData[4], s.vertexData[5]]
+        )
+      );
+      shapes[idx].appendVertex(
+        [s.vertexData[6], s.vertexData[7]],
+        [s.vertexData[8], s.vertexData[9], s.vertexData[10], s.vertexData[11]]
+      );
+    }
+
+    if (s.kind === "square") {
+      shapes.push(
+        new Square(
+          gl,
+          [s.vertexData[0], s.vertexData[1]],
+          [s.vertexData[2], s.vertexData[3], s.vertexData[4], s.vertexData[5]]
+        )
+      );
+      for (let i = 1; i < 4; i++) {
+        shapes[idx].appendVertex(
+          [s.vertexData[i * 6], s.vertexData[i * 6 + 1]],
+          [
+            s.vertexData[i * 6 + 2],
+            s.vertexData[i * 6 + 3],
+            s.vertexData[i * 6 + 4],
+            s.vertexData[i * 6 + 5],
+          ]
+        );
+      }
+    }
+
+    if (s.kind === "rectangle") {
+      shapes.push(
+        new Rectangle(
+          gl,
+          [s.vertexData[0], s.vertexData[1]],
+          [s.vertexData[2], s.vertexData[3], s.vertexData[4], s.vertexData[5]]
+        )
+      );
+      for (let i = 1; i < 4; i++) {
+        shapes[idx].appendVertex(
+          [s.vertexData[i * 6], s.vertexData[i * 6 + 1]],
+          [
+            s.vertexData[i * 6 + 2],
+            s.vertexData[i * 6 + 3],
+            s.vertexData[i * 6 + 4],
+            s.vertexData[i * 6 + 5],
+          ]
+        );
+      }
+    }
+
+    if (s.kind === "polygon") {
+      shapes.push(
+        new Polygon(
+          gl,
+          [s.vertexData[0], s.vertexData[1]],
+          [s.vertexData[2], s.vertexData[3], s.vertexData[4], s.vertexData[5]]
+        )
+      );
+      for (let i = 1; i < s.vertexData.length / 6; i++) {
+        shapes[idx].appendVertex(
+          [s.vertexData[i * 6], s.vertexData[i * 6 + 1]],
+          [
+            s.vertexData[i * 6 + 2],
+            s.vertexData[i * 6 + 3],
+            s.vertexData[i * 6 + 4],
+            s.vertexData[i * 6 + 5],
+          ]
+        );
+        shapes[idx].shaderCount++;
+      }
+    }
+    idx++;
+  });
+}
+
 function sendBackward() {
   if (selectStatus && selectedIndex > 0 && selectedIndex < shapes.length) {
     [shapes[selectedIndex], shapes[selectedIndex - 1]] = [

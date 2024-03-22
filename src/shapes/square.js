@@ -1,6 +1,6 @@
 class Square extends Shape {
   constructor(gl, coordinates, color) {
-    super(gl.TRIANGLE_FAN, 0, 4, color, coordinates);
+    super(gl.TRIANGLE_FAN, 0, 4, color, coordinates, "square");
   }
 
   changeLastCoord(coord) {

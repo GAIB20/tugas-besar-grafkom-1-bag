@@ -1,9 +1,17 @@
 class Polygon extends Shape {
   constructor(gl, coordinates, color, shaderCount) {
     if (arguments.length === 4) {
-      super(gl.TRIANGLE_FAN, 0, shaderCount, color, coordinates, "copy");
+      super(
+        gl.TRIANGLE_FAN,
+        0,
+        shaderCount,
+        color,
+        coordinates,
+        "polygon",
+        "copy"
+      );
     } else {
-      super(gl.TRIANGLE_FAN, 0, 1, color, coordinates);
+      super(gl.TRIANGLE_FAN, 0, 1, color, coordinates, "polygon");
     }
   }
 

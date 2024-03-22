@@ -1,5 +1,6 @@
 var util = new Utility();
 var canvas = document.querySelector("#canvas");
+var inputModel = document.getElementById("load-file");
 var gl = canvas.getContext("webgl");
 
 var shapes = [];
@@ -25,6 +26,18 @@ async function main() {
     window.alert("Error initializing WebGL");
     return;
   }
+
+  inputModel.onchange = (e) => {
+    shapes = [];
+    var file = e.target.files[0];
+    var reader = new FileReader();
+
+    reader.readAsText(file, "UTF-8");
+    reader.onload = (readerEvent) => {
+      var content = readerEvent.target.result;
+      loadModelContent(content);
+    };
+  };
 
   var program = await util.createDefaultShaderProgram(gl);
   var positionAttributeLocation = gl.getAttribLocation(program, "a_position");
@@ -85,18 +98,6 @@ async function main() {
       if (polygonPlaceHolder) {
         polygonPlaceHolder.draw(gl);
       }
-      // shapes.lines.forEach((l) => {
-      //     l.draw(gl);
-      // });
-      // shapes.squares.forEach((s) => {
-      //     s.draw(gl);
-      // });
-      // shapes.rectangles.forEach((r) => {
-      //     r.draw(gl);
-      // });
-      // shapes.polygons.forEach((p) => {
-      //     p.draw(gl);
-      // });
     } catch (e) {
       console.log(e.message);
     }

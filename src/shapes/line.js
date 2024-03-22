@@ -1,6 +1,6 @@
 class Line extends Shape {
   constructor(gl, coordinates, color) {
-    super(gl.LINES, 0, 2, color, coordinates);
+    super(gl.LINES, 0, 2, color, coordinates, "line");
   }
 
   isInside(coordinate) {
