@@ -9,12 +9,14 @@ var selectStatus = false;
 var polygonPlaceHolder = null;
 var selectedIndex = -1;
 var selectedPoint = -1;
+var baseDistance = null;
 
 var clickedModes = {
   line: { click: false, hover: false },
   square: { click: false, hover: false },
   rectangle: { click: false, hover: false },
   polygon: { click: false, hover: false },
+  translate: false,
   movePoint: false,
   resize: false,
   select: false,

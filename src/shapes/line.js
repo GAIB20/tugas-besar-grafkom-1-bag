@@ -71,20 +71,6 @@ class Line extends Shape {
     }
   }
 
-  translate(newCoord, baseDistance) {
-    const middle = this.getMiddle();
-    const [dx, dy] = [newCoord[0] - middle[0], newCoord[1] - middle[1]];
-    const [newDistanceX, newDistanceY] = [
-      dx - baseDistance[0],
-      dy - baseDistance[1],
-    ];
-
-    this.vertexData[0] += newDistanceX;
-    this.vertexData[1] += newDistanceY;
-    this.vertexData[6] += newDistanceX;
-    this.vertexData[7] += newDistanceY;
-  }
-
   rotate(coord, middle) {
     const angle = this.calculateAngleBetweenPoints(coord, middle);
 
