@@ -17,6 +17,7 @@ var clickedModes = {
   movePoint: false,
   resize: false,
   select: false,
+  addPolygon: false,
 };
 
 async function main() {

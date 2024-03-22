@@ -102,6 +102,14 @@ class Polygon extends Shape {
   }
 
   addCoordinate(coordinate) {
+    for (let i = 0; i < this.getPointCount(); i++) {
+      if (
+        this.vertexData[i * 6] === coordinate[0] &&
+        this.vertexData[i * 6 + 1] === coordinate[1]
+      ) {
+        return;
+      }
+    }
     this.appendVertex(coordinate);
     this.shaderCount++;
     this.convexHull();
