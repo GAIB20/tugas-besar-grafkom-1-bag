@@ -42,34 +42,3 @@ function clearSelectedPoints() {
   selectStatus = false;
   resetSelectedPoints();
 }
-
-function sendBackward() {
-  if (selectStatus && selectedIndex > 0 && selectedIndex < shapes.length) {
-    [shapes[selectedIndex], shapes[selectedIndex - 1]] = [
-      shapes[selectedIndex - 1],
-      shapes[selectedIndex],
-    ];
-
-    selectedIndex--;
-  }
-}
-
-function sendForward() {
-  if (selectStatus && selectedIndex >= 0 && selectedIndex < shapes.length - 1) {
-    [shapes[selectedIndex], shapes[selectedIndex + 1]] = [
-      shapes[selectedIndex + 1],
-      shapes[selectedIndex],
-    ];
-
-    selectedIndex++;
-  }
-}
-
-function goToBack() {
-  if (selectStatus && selectedIndex > 0 && selectedIndex < shapes.length) {
-    const [selectedShape] = shapes.splice(selectedIndex, 1);
-    shapes.unshift(selectedShape);
-
-    selectedIndex = 0;
-  }
-}
