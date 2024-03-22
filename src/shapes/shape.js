@@ -67,6 +67,20 @@ class Shape {
     }
   }
 
+  translate(newCoord, baseDistance) {
+    const middle = this.getMiddle();
+    const [dx, dy] = [newCoord[0] - middle[0], newCoord[1] - middle[1]];
+    const [newDistanceX, newDistanceY] = [
+      dx - baseDistance[0],
+      dy - baseDistance[1],
+    ];
+
+    for (let i = 0; i < this.getPointCount(); i++) {
+      this.vertexData[i * 6] += newDistanceX;
+      this.vertexData[i * 6 + 1] += newDistanceY;
+    }
+  }
+
   getMiddle() {
     let totalX = 0;
     let totalY = 0;

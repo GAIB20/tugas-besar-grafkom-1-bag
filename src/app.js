@@ -9,6 +9,7 @@ var selectStatus = false;
 var polygonPlaceHolder = null;
 var selectedIndex = -1;
 var selectedPoint = -1;
+var baseDistance = null;
 
 var clickedModes = {
   line: { click: false, hover: false },
