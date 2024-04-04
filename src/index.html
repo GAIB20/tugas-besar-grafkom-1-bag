@@ -4,8 +4,70 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tubes 1 Grafkom</title>
+    <style>
+      body {
+        background-color: black;
+        color: white;
+      }
+  
+      .container {
+        display: flex;
+        justify-content: space-between;
+        margin: 20px;
+      }
+  
+      .tools-board {
+        background-color: black;
+        padding: 20px;
+        border: 1px solid white; 
+      }
+  
+      .button-3 {
+        background-color: white;
+        color: black;
+        border: grey;
+        padding: 10px 20px;
+        margin: 5px;
+        cursor: pointer;
+      }
+  
+      .button-3:hover {
+        background-color: #666666;
+        border: white;
+        color: white;
+      }
+  
+      .color-picker {
+        margin-top: 10px;
+      }
+  
+      .options,
+      .tools,
+      .polygon-tools,
+      .layer-tools {
+        margin-bottom: 10px;
+      }
+  
+      .label {
+        color: white;
+        margin-top: 10px;
+      }
+
+      .canvas-board {
+        background-color: white; 
+        padding: 10px; 
+      }
+
+      h1.title {
+        color: #CCCCCC; /* Warna abu-abu */
+        border-bottom: 1px solid white; /* Garis putih di bawah judul */
+        padding-bottom: 10px; /* Ruang antara judul dan border */
+        font-size: 32px; /* Ukuran teks judul */
+      }
+    </style>  
   </head>
   <body>
+    <h1 class="title">Tubes Grafkom BAG</h1>
     <div class="container">
       <div class="canvas-board">
         <canvas id="canvas" width="800" height="400"></canvas>
