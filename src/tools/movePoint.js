@@ -21,7 +21,7 @@ function handleSelectPoint(event) {
 
         if (isPolygon) {
           const vertexDatas = shapes[selectedIndex].copyVertexData();
-          const baseColor = shapes[selectedIndex].getBaseColor();
+          const baseColor = shapes[selectedIndex].getVertexColor(selectedPoint);
           const pointCount = shapes[selectedIndex].getPointCount();
 
           tempPolygon = new Polygon(gl, vertexDatas, baseColor, pointCount);

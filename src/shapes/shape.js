@@ -109,6 +109,15 @@ class Shape {
     return this.baseColor;
   }
 
+  getVertexColor(index) {
+    return [
+      this.vertexData[index * 6 + 2],
+      this.vertexData[index * 6 + 3],
+      this.vertexData[index * 6 + 4],
+      this.vertexData[index * 6 + 5],
+    ];
+  }
+
   setVertexColor(index, color) {
     this.vertexData[index * 6 + 2] = color[0];
     this.vertexData[index * 6 + 3] = color[1];
